@@ -4,7 +4,7 @@ from otree.api import (
 )
 
 
-author = 'Eli Pandolfo'
+author = 'Your name here'
 
 doc = """
 Your app description
@@ -12,7 +12,7 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'oh1'
+    name_in_url = 'game1'
     players_per_group = None
     num_rounds = 1
 

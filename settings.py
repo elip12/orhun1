@@ -13,10 +13,10 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
-       'name': 'oh1',
-       'display_name': "orhun1",
+       'name': 'orhun1',
+       'display_name': 'orhun1',
        'num_demo_participants': 1,
-       'app_sequence': ['oh1'],
+       'app_sequence': ['baseline', 'game1', 'game2'],
     },
 ]
 
