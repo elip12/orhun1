@@ -30,3 +30,8 @@
     This doesn't really solve the problem described above since otree thinks
     they're still in the group and to my knowledge otree has no 'remove from group' feature.
     
+    There is also and issue with custom bonuses on mechanical turk. I have not used and and am not
+    sure how payment is done with mturk.
+
+    https://otree.readthedocs.io/en/latest/mturk.html
+    https://otree.readthedocs.io/en/latest/multiplayer/waitpages.html
