@@ -8,6 +8,7 @@
 {% block scripts %}
     <script type="text/javascript">
 
+        // evaluate random variable for determining whether player get firm A or B in choice mode 2
         var rval = Math.floor(Math.random() * 26)
 
         window.onload = function () 
@@ -19,6 +20,8 @@
 
         }
 
+        // when the slider is updated, the new value is compared to the random variable
+        // generated when the page loaded, and the value of the input firm is updated
         update = function() {
             disp = document.getElementById('value')
             slider = document.getElementById('slider')

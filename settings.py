@@ -32,9 +32,9 @@ SESSION_CONFIGS = [
        'app_sequence': ['baseline', 'waitpage', 'game1', 'game2'],
        'lower_bound': 0,
        'upper_bound': 10,
-       'min_players': 3,
-       'time_limit': 1,
-       'use_browser_bots': True,
+       'min_players': 6,
+       'time_limit': 120,
+       #'use_browser_bots': True,
     },
     # {
     #    'name': 'baseline',
