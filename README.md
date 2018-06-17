@@ -1,6 +1,6 @@
-To begin
+To begin:
 =============
-    clone this repo and cd to it.
+    clone this repo and cd into it.
     $ pip install -r requirements_base.txt
     $ otree devserver/resetdb...
 
