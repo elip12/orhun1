@@ -1,9 +1,11 @@
-#To begin
+To begin
+=============
     clone this repo and cd to it.
     $ pip install -r requirements_base.txt
     $ otree devserver/resetdb...
 
-#Notes:
+Notes:
+=============
     The logical aspects all work.
     I do not have an MTurk account, so I cannot test this with the MTurk interface.
     The MTurk settings have been inserted, but a description of the experiment needs to be added in
