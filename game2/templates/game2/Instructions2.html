@@ -5,11 +5,29 @@
     Game 2 Instructions
 {% endblock %}
 
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 
     <!DOCTYPE html>
     <html>
         <body>
+            <input type="hidden" name="time_Instructions2" id="arrive_time"/>
             <p>
                 In this task, you will..
                 <br><br>

@@ -5,11 +5,29 @@
     Overall Results
 {% endblock %}
 
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 
     <!DOCTYPE html>
     <html>
         <body>
+            <input type="hidden" name="time_Results" id="arrive_time"/>
             <p>
                 In the baseline task, you attempted {{ bl_attempted }} {{ bl_problems }} and got {{ bl_score }} correct.
                 <br>

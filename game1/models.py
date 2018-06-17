@@ -81,9 +81,15 @@ class Player(BasePlayer):
 
     # firm chosen
     firm = models.StringField(
-        choices=['A', 'B'],
-        widget=widgets.RadioSelect
+        # choices=['A', 'B'],
+        # widget=widgets.RadioSelect
     )
+
+    # arrival times
+    time_ChooseFirm = models.StringField()
+    time_Instructions1 = models.StringField()
+    time_Game1 = models.StringField()
+    time_Results1 = models.StringField()
 
 
 

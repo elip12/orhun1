@@ -2,7 +2,46 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+    Choose Firm
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+
+        var rval = Math.floor(Math.random() * 26)
+
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+            if ({{ choice | json }} == 2) {
+                update()
+            }
+
+        }
+
+        update = function() {
+            disp = document.getElementById('value')
+            slider = document.getElementById('slider')
+            firm = document.getElementById('firm')
+            disp.innerHTML = '$0.' + slider.value + (slider.value < 10 ? '0' : '')
+
+            if(slider.value > rval) {
+                firm.value = 'A'
+            }
+            else {
+                firm.value = 'B'
+            }
+        }
+
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -10,13 +49,38 @@
     <!DOCTYPE html>
     <html>
         <body>
+            <input type="hidden" name="time_ChooseFirm" id="arrive_time"/>
             <p>
-                Choose your firm. If you choose firm A, you and the other members of your group
+                If you choose firm A, you and the other members of your group
                 (your opponents) will be able to see each other's baseline scores. If you choose
-                firm B, you will only be able to see your own baseline score.
+                firm B, each of you will only be able to see your own baseline score.
             </p>
+            {% if choice == 1 %}
+                <p>
+                    Choose your firm.
+                </p>
 
-            {% formfield player.firm %}
+                <input type="radio" name="firm" value="A">
+                A <br>
+                <input type="radio" name=firm" vlaue="B">
+                B <br>
+            {% elif choice == 2 %}
+                <div>
+                    How much would you be willing to pay to for Firm A?
+                </div>
+                <br>
+                <div id="value">
+                </div>
+                <br>
+                <input type="range" min="0" max="25" value="0"
+                    id="slider" oninput="update()">
+                <br>
+
+                <input type="hidden" name="firm" id="firm">
+                {{ form.firm.errors }}
+            
+            {% endif %}
+            <br>
         </body>
     </html>
 

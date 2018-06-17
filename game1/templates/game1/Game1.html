@@ -41,6 +41,7 @@
 
         // called when the page first loads
         window.onload = function() {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
             next()
         }
 
@@ -57,6 +58,7 @@
             <br><br>
         </head>
         <body>
+            <input type="hidden" name="time_Game1" id="arrive_time"/>
             <input type="hidden" name="game1_score" id="correct">
             <input type="hidden" name="attempted" id="attempted">
             <div>

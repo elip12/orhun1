@@ -3,6 +3,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 import inflect
+from django.conf import settings
 
 # wait page before game 1
 class Game1WaitPage(WaitPage):
@@ -14,10 +15,16 @@ class Game1WaitPage(WaitPage):
 # one player in each group chooses firm A or firm B
 class ChooseFirm(Page):
     form_model = 'player'
-    form_fields = ['firm']
+    form_fields = ['firm', 'time_ChooseFirm']
+
+    timeout_seconds = 60
+    timeout_submission = {'firm': 'B'}
 
     def is_displayed(self):
         return self.player.id_in_group == 1
+
+    def vars_for_template(self):
+        return {'choice': 1 if random.random() >= .5 else 2}
 
     def before_next_page(self):
         for p in self.group.get_players():
@@ -30,6 +37,9 @@ class Instructions1WaitPage(WaitPage):
 
 # instructions for game 1
 class Instructions1(Page):
+    form_model = 'player'
+    form_fields = ['time_Instructions1']
+    timeout_seconds = 60
     
     def vars_for_template(self):
         you = self.player.id_in_group
@@ -46,10 +56,10 @@ class Instructions1(Page):
 # game 1 task
 class Game1(Page):
     form_model = 'player'
-    form_fields = ['game1_score', 'attempted']
+    form_fields = ['game1_score', 'attempted', 'time_Game1']
 
     # timer until page automatically submits itself
-    timeout_seconds = 120
+    timeout_seconds = settings.SESSION_CONFIGS[0]['time_limit']
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):
@@ -76,20 +86,23 @@ class Results1WaitPage(WaitPage):
         players = sorted(random.sample([p1, p2, p3], k=3), key=lambda x: x.game1_score, reverse = True)
 
         for i in range(3):
-            if player[i].game2_score == 0:
-                player[i].game2_rank = 3
+            if players[i].game1_score == 0:
+                players[i].game1_rank = 3
                 players[i].participant.vars['game1_rank'] = 3
-                player[i].game2_bonus = 0
+                players[i].game1_bonus = 0
                 players[i].participant.vars['game1_bonus'] = 0
             else:
-                players[i].game2_rank = i + 1
+                players[i].game1_rank = i + 1
                 players[i].participant.vars['game1_rank'] = i + 1
-                players[i].game2_bonus = 2 - i
+                players[i].game1_bonus = 2 - i
                 players[i].participant.vars['game1_bonus'] = 2 - i
                 players[i].payoff = c(2 - i)
 
 # game 1 results
 class Results1(Page):
+    form_model = 'player'
+    form_fields = ['time_Results1']
+    timeout_seconds = 60
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):

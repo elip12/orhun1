@@ -3,6 +3,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 import inflect
+from django.conf import settings
 
 # wait page before game 1
 class Game2WaitPage(WaitPage):
@@ -17,6 +18,9 @@ class Game2WaitPage(WaitPage):
 
 # instructions for game 2
 class Instructions2(Page):
+    form_model = 'player'
+    form_fields = ['time_Instructions2']
+    timeout_seconds = 60
     
     def vars_for_template(self):
         you = self.player.id_in_group
@@ -33,10 +37,10 @@ class Instructions2(Page):
 # game 1 task
 class Game2(Page):
     form_model = 'player'
-    form_fields = ['game2_score', 'attempted']
+    form_fields = ['game2_score', 'attempted', 'time_Game2']
 
     # timer until page automatically submits itself
-    timeout_seconds = 120
+    timeout_seconds = settings.SESSION_CONFIGS[0]['time_limit']
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):
@@ -62,9 +66,9 @@ class Results2WaitPage(WaitPage):
         players = sorted(random.sample([p1, p2, p3], k=3), key=lambda x: x.game2_score, reverse=True)
 
         for i in range(3):
-            if player[i].game2_score == 0:
-                player[i].game2_rank = 3
-                player[i].game2_bonus = 0
+            if players[i].game2_score == 0:
+                players[i].game2_rank = 3
+                players[i].game2_bonus = 0
             else:
                 players[i].game2_rank = i + 1
                 players[i].game2_bonus = 2 - i
@@ -73,6 +77,9 @@ class Results2WaitPage(WaitPage):
 
 # game 2 results
 class Results2(Page):
+    form_model = 'player'
+    form_fields = ['time_Results2']
+    timeout_seconds = 60
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):
@@ -86,6 +93,9 @@ class Results2(Page):
 
 # overall results
 class Results(Page):
+    form_model = 'player'
+    form_fields = ['time_Results']
+    timeout_seconds = 60
 
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):
@@ -104,6 +114,10 @@ class Results(Page):
         g2_problems = inflect.engine().plural('problem', g2_attempted)
         g2_rank = self.player.game2_rank
         g2_bonus = self.player.game2_bonus
+
+        # should there be a uniform participation fee on top of this?
+        # doing it this way bc mturk pays participants the participation_fee defined in settings
+        # settings.SESSION_CONFIGS[0]['participation_fee'] = g1_bonus + g2_bonus
 
         return {
             'bl_attempted': bl_attempted,

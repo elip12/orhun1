@@ -85,6 +85,12 @@ class Player(BasePlayer):
     # firm chosen
     firm = models.StringField()
 
+    # arrival times for pages
+    time_Instructions2 = models.StringField()
+    time_Game2 = models.StringField()
+    time_Results2 = models.StringField()
+    time_Results = models.StringField()
+
 
 
 """

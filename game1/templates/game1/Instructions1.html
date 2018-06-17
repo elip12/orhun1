@@ -5,14 +5,34 @@
     Game 1 Instructions
 {% endblock %}
 
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString();
+        }
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 
     <!DOCTYPE html>
     <html>
         <body>
+            <input type="hidden" name="time_Instructions1" id="arrive_time"/>
             <p>
-                In this task, you will..
+                In this task, you will...
                 <br><br>
+                Your firm: {{ firm }}.
+                <br>
                 Your baseline score: {{ baseline }}.
                 <br>
                 {% if firm == 'A' %}

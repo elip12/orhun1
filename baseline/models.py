@@ -73,6 +73,11 @@ class Player(BasePlayer):
     # number of problems attempted
     attempted = models.IntegerField()
 
+    # arrival times
+    time_Instructions = models.StringField()
+    time_Baseline = models.StringField()
+    time_ResultsBL = models.StringField()
+
 
 
 """

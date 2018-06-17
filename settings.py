@@ -28,10 +28,13 @@ SESSION_CONFIGS = [
     {
        'name': 'orhun1',
        'display_name': 'orhun1',
-       'num_demo_participants': 12,
+       'num_demo_participants': 3,
        'app_sequence': ['baseline', 'waitpage', 'game1', 'game2'],
        'lower_bound': 0,
-       'upper_bound': 10
+       'upper_bound': 10,
+       'min_players': 3,
+       'time_limit': 1,
+       'use_browser_bots': True,
     },
     # {
     #    'name': 'baseline',
