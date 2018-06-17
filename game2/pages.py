@@ -8,7 +8,12 @@ import inflect
 class Game2WaitPage(WaitPage):
     
     def after_all_players_arrive(self):
-        pass
+        p1 = self.group.get_player_by_id(1)
+        p2 = self.group.get_player_by_id(2)
+        p3 = self.group.get_player_by_id(3)
+        p1.firm = 'B' if p1.participant.vars['firm'] == 'A' else 'A'
+        p2.firm = p1.firm
+        p3.firm = p1.firm
 
 # instructions for game 2
 class Instructions2(Page):
@@ -31,7 +36,7 @@ class Game2(Page):
     form_fields = ['game2_score', 'attempted']
 
     # timer until page automatically submits itself
-    timeout_seconds = 20
+    timeout_seconds = 120
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):
@@ -48,27 +53,22 @@ class Results2WaitPage(WaitPage):
     
     def after_all_players_arrive(self):
 
-        # in case 2 players have a tied score, chance decides which one gets $2
-        # and which one gets $1
-        i1 = random.randint(1,3)
-        i2 = i1 % 3 + 1
-        i3 = (i1 + 1) % 3 + 1
+        # in case 2 players have a tied score, chance decides how bonuses are distributed
+        p1 = self.group.get_player_by_id(1)
+        p2 = self.group.get_player_by_id(2)
+        p3 = self.group.get_player_by_id(3)
 
-        p1 = self.group.get_player_by_id(i1)
-        p2 = self.group.get_player_by_id(i2)
-        p3 = self.group.get_player_by_id(i3)
+        # sorted() is guaranteed to be stable, so the list is shuffled first to ensure randomness
+        players = sorted(random.sample([p1, p2, p3], k=3), key=lambda x: x.game2_score, reverse=True)
 
-        scores = sorted([p1, p2, p3], key=lambda x: x.game2_score, reverse=True)
-
-        scores[0].payoff = 2
-        scores[0].participant.vars['game2_rank'] = 1
-        scores[0].participant.vars['game2_bonus'] = 2
-        scores[1].payoff = 1
-        scores[1].participant.vars['game2_rank'] = 2
-        scores[1].participant.vars['game2_bonus'] = 1
-        scores[2].payoff = 0
-        scores[2].participant.vars['game2_rank'] = 3
-        scores[2].participant.vars['game2_bonus'] = 0
+        for i in range(3):
+            if player[i].game2_score == 0:
+                player[i].game2_rank = 3
+                player[i].game2_bonus = 0
+            else:
+                players[i].game2_rank = i + 1
+                players[i].game2_bonus = 2 - i
+                players[i].payoff = c(2 - i)
 
 
 # game 2 results
@@ -102,8 +102,8 @@ class Results(Page):
         g2_attempted = self.player.attempted
         g2_score = self.player.game2_score
         g2_problems = inflect.engine().plural('problem', g2_attempted)
-        g2_rank = self.player.participant.vars['game2_rank']
-        g2_bonus = self.player.participant.vars['game2_bonus']
+        g2_rank = self.player.game2_rank
+        g2_bonus = self.player.game2_bonus
 
         return {
             'bl_attempted': bl_attempted,
@@ -118,7 +118,8 @@ class Results(Page):
             'g2_score': g2_score,
             'g2_problems': g2_problems,
             'g2_rank': g2_rank,
-            'g2_bonus': g2_bonus
+            'g2_bonus': g2_bonus,
+            'total_bonus': g1_bonus + g2_bonus
         }
 
 

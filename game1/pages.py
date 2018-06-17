@@ -6,6 +6,7 @@ import inflect
 
 # wait page before game 1
 class Game1WaitPage(WaitPage):
+    group_by_arrival_time = True
     
     def after_all_players_arrive(self):
         pass
@@ -48,7 +49,7 @@ class Game1(Page):
     form_fields = ['game1_score', 'attempted']
 
     # timer until page automatically submits itself
-    timeout_seconds = 20
+    timeout_seconds = 120
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):
@@ -66,28 +67,26 @@ class Results1WaitPage(WaitPage):
     
     def after_all_players_arrive(self):
 
-        # in case 2 players have a tied score, chance decides which one gets $2
-        # and which one gets $1
-        i1 = random.randint(1,3)
-        i2 = i1 % 3 + 1
-        i3 = (i1 + 1) % 3 + 1
+        # in case 2 players have a tied score, chance decides how bonuses are distributed
+        p1 = self.group.get_player_by_id(1)
+        p2 = self.group.get_player_by_id(2)
+        p3 = self.group.get_player_by_id(3)
 
-        p1 = self.group.get_player_by_id(i1)
-        p2 = self.group.get_player_by_id(i2)
-        p3 = self.group.get_player_by_id(i3)
+        # sorted() is guaranteed to be stable, so the list is shuffled first to ensure randomness
+        players = sorted(random.sample([p1, p2, p3], k=3), key=lambda x: x.game1_score, reverse = True)
 
-        scores = sorted([p1, p2, p3], key=lambda x: x.game1_score, reverse = True)
-
-        scores[0].payoff = 2
-        scores[0].participant.vars['game1_rank'] = 1
-        scores[0].participant.vars['game1_bonus'] = 2
-        scores[1].payoff = 1
-        scores[1].participant.vars['game1_rank'] = 2
-        scores[1].participant.vars['game1_bonus'] = 1
-        scores[2].payoff = 0
-        scores[2].participant.vars['game1_rank'] = 3
-        scores[2].participant.vars['game1_bonus'] = 0
-
+        for i in range(3):
+            if player[i].game2_score == 0:
+                player[i].game2_rank = 3
+                players[i].participant.vars['game1_rank'] = 3
+                player[i].game2_bonus = 0
+                players[i].participant.vars['game1_bonus'] = 0
+            else:
+                players[i].game2_rank = i + 1
+                players[i].participant.vars['game1_rank'] = i + 1
+                players[i].game2_bonus = 2 - i
+                players[i].participant.vars['game1_bonus'] = 2 - i
+                players[i].payoff = c(2 - i)
 
 # game 1 results
 class Results1(Page):

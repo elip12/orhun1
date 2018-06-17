@@ -28,10 +28,7 @@
         // verifies their answer and calls next()
         verify = function() {
             var submitted = document.getElementById('submit_').value
-            if(submitted == '') {
-                alert("Please enter a number")
-            }
-            else {
+            if(submitted != '') {
                 document.getElementById('submit_').value = ''
                 var current = problems[counter]
                 var answer = current[1]

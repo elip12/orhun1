@@ -5,39 +5,51 @@ from os import environ
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
+mturk_hit_settings = {
+    'keywords': ['bonus', 'study'],
+    'title': 'orhun1',
+    'description': 'Add a description here',
+    'frame_height': 500,
+    'preview_template': 'global/MTurkPreview.html',
+    'minutes_allotted_per_assignment': 60,
+    'expiration_hours': 7*24, # 7 days
+    #'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
+    'qualification_requirements': []
+}
+
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
     'doc': "",
+    'mturk_hit_settings': mturk_hit_settings,
 }
 
 SESSION_CONFIGS = [
     {
        'name': 'orhun1',
        'display_name': 'orhun1',
-       'num_demo_participants': 3,
-       'app_sequence': ['baseline', 'game1', 'game2'],
+       'num_demo_participants': 12,
+       'app_sequence': ['baseline', 'waitpage', 'game1', 'game2'],
        'lower_bound': 0,
        'upper_bound': 10
     },
-    {
-       'name': 'baseline',
-       'display_name': 'baseline',
-       'num_demo_participants': 1,
-       'app_sequence': ['baseline'],
-       'lower_bound': 0,
-       'upper_bound': 10
-    },
-    {
-       'name': 'game1',
-       'display_name': 'game 1',
-       'num_demo_participants': 3,
-       'app_sequence': ['game1'],
-       'lower_bound': 0,
-       'upper_bound': 10
-    },
+    # {
+    #    'name': 'baseline',
+    #    'display_name': 'baseline',
+    #    'num_demo_participants': 1,
+    #    'app_sequence': ['baseline'],
+    #    'lower_bound': 0,
+    #    'upper_bound': 10
+    # },
+    # {
+    #    'name': 'game1',
+    #    'display_name': 'game 1',
+    #    'num_demo_participants': 3,
+    #    'app_sequence': ['game1'],
+    #    'lower_bound': 0,
+    #    'upper_bound': 10
+    # },
 ]
-
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

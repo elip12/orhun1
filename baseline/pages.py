@@ -13,7 +13,7 @@ class Baseline(Page):
     form_fields = ['baseline_score', 'attempted']
 
     # timer until page automatically submits itself
-    timeout_seconds = 20
+    timeout_seconds = 120
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):

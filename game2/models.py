@@ -62,23 +62,6 @@ class Subsession(BaseSubsession):
     def creating_session(self):
 
         self.group_randomly(fixed_id_in_group=True)
-        
-        # creates baseline score variable to transfer between apps
-        for g in self.get_groups():
-            
-            # this is temporary, for testing this app on its own
-            for p in g.get_players():
-                p.participant.vars['firm'] = 'A'
-                p.participant.vars['baseline_score'] = 3
-                p.participant.vars['game1_score'] = 3
-
-
-            p1 = g.get_player_by_id(1)
-            p2 = g.get_player_by_id(2)
-            p3 = g.get_player_by_id(3)
-            p1.firm = 'B' if p.participant.vars['firm'] == 'A' else 'A'
-            p2.firm = p1.firm
-            p3.firm = p1.firm
 
 
 class Group(BaseGroup):
@@ -89,6 +72,12 @@ class Player(BasePlayer):
     
     # number of correct answers in baseline task
     game2_score = models.IntegerField()
+
+    # player's rank out of 3
+    game2_rank = models.IntegerField()
+
+    # player's bonus for game 2
+    game2_bonus = models.IntegerField()
 
     # number of problems attempted
     attempted = models.IntegerField()

@@ -58,16 +58,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    
-    def creating_session(self):
-
-        self.group_randomly()
-        
-        # creates baseline score variable to transfer between apps
-        for p in self.get_players():
-
-            # this is temporary, for testing this app on its own
-            p.participant.vars['baseline_score'] = 3
+    pass
 
 
 class Group(BaseGroup):
@@ -78,6 +69,12 @@ class Player(BasePlayer):
     
     # number of correct answers in baseline task
     game1_score = models.IntegerField()
+
+    # player's rank out of 3
+    game1_rank = models.IntegerField()
+
+    # player's bonus for game 1
+    game1_bonus = models.IntegerField()
 
     # number of problems attempted
     attempted = models.IntegerField()
