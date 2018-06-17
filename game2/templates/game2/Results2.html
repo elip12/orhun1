@@ -7,6 +7,17 @@
 
 {% block content %}
 
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <p>
+                You attempted {{ attempted }} {{ problems }} and got {{ correct }} correct.
+                <br><br>
+                Your score is {{ correct }}.
+            </p>
+        </body>
+    </html>
+
     {% next_button %}
 {% endblock %}
 

@@ -13,7 +13,7 @@ class Baseline(Page):
     form_fields = ['baseline_score', 'attempted']
 
     # timer until page automatically submits itself
-    timeout_seconds = 120
+    timeout_seconds = 20
     
     # variables that will be passed to the html and can be referenced from html or js
     def vars_for_template(self):
@@ -24,6 +24,7 @@ class Baseline(Page):
     # is called after the timer runs out and this page's forms are submitted
     # sets the participant.vars to transfer to next round
     def before_next_page(self):
+        self.player.participant.vars['baseline_attempted'] = self.player.attempted
         self.player.participant.vars['baseline_score'] = self.player.baseline_score
 
 # baseline results
@@ -36,7 +37,7 @@ class ResultsBL(Page):
             'correct': self.player.baseline_score,
 
             # automoatically pluralizes the word 'problem' if necessary
-            'problems': inflect.engine().plural('problem', self.player.baseline_score)
+            'problems': inflect.engine().plural('problem', self.player.attempted)
         }
 
 

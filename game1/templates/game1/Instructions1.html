@@ -7,6 +7,25 @@
 
 {% block content %}
 
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <p>
+                In this task, you will..
+                <br><br>
+                Your baseline score: {{ baseline }}.
+                <br>
+                {% if firm == 'A' %}
+                    Opponent 1's baseline score: {{ opponent1 }}.
+                    <br>
+                    Opponent 2's baseline score: {{ opponent2 }}.
+                {% endif %}
+                <br><br>
+                Good luck!
+            </p>
+        </body>
+    </html>
+
     {% next_button %}
 {% endblock %}
 

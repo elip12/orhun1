@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <p>
+                Choose your firm. If you choose firm A, you and the other members of your group
+                (your opponents) will be able to see each other's baseline scores. If you choose
+                firm B, you will only be able to see your own baseline score.
+            </p>
+
+            {% formfield player.firm %}
+        </body>
+    </html>
+
+    {% next_button %}
+
+{% endblock %}

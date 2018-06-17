@@ -4,6 +4,7 @@ from otree.api import (
 )
 import inflect
 import random
+from django.conf import settings
 
 author = 'Eli Pandolfo'
 
@@ -13,15 +14,16 @@ author = 'Eli Pandolfo'
 class Constants(BaseConstants):
 
     # can be changed to anything
-    name_in_url = 'oh1'
+    name_in_url = 'Baseline Task'
 
     # Do not change
     players_per_group = None
     num_rounds = 1
 
     # these are variable and can be set to anything by the person running the experiment.
-    lower_bound = 0
-    upper_bound = 10
+    # 0 and 100 are the default values
+    lower_bound = settings.SESSION_CONFIGS[0]['lower_bound']
+    upper_bound = settings.SESSION_CONFIGS[0]['upper_bound']
 
     problems = []
     
@@ -56,13 +58,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    
-    def creating_session(self):
-        
-        # creates baseline score variable to transfer between apps
-        for p in self.get_players():
-            p.participant.vars['baseline_score'] = 0
-
+    pass
 
 class Group(BaseGroup):
     pass

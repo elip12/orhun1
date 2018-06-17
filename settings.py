@@ -15,8 +15,26 @@ SESSION_CONFIGS = [
     {
        'name': 'orhun1',
        'display_name': 'orhun1',
-       'num_demo_participants': 1,
+       'num_demo_participants': 3,
        'app_sequence': ['baseline', 'game1', 'game2'],
+       'lower_bound': 0,
+       'upper_bound': 10
+    },
+    {
+       'name': 'baseline',
+       'display_name': 'baseline',
+       'num_demo_participants': 1,
+       'app_sequence': ['baseline'],
+       'lower_bound': 0,
+       'upper_bound': 10
+    },
+    {
+       'name': 'game1',
+       'display_name': 'game 1',
+       'num_demo_participants': 3,
+       'app_sequence': ['game1'],
+       'lower_bound': 0,
+       'upper_bound': 10
     },
 ]
 
