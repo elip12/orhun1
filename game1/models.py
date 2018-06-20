@@ -85,6 +85,22 @@ class Player(BasePlayer):
         # widget=widgets.RadioSelect
     )
 
+    # whether the switch was made
+    # Yes, No, N/A (not offered)
+    switch = models.StringField()
+
+    # these will be offered to 1/6 of all players, for others the fields will be left blank
+    c5 =  models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c10 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c15 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c20 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c25 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c30 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c35 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c40 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c45 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+    c50 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=["Yes", "No"])
+
     # arrival times
     time_ChooseFirm = models.StringField()
     time_Instructions1 = models.StringField()

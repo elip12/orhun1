@@ -20,10 +20,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    
-    def creating_session(self):
-        self.session.vars['players_allowed'] = True
-
+    pass
 
 class Group(BaseGroup):
     pass

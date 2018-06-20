@@ -8,31 +8,155 @@
 {% block scripts %}
     <script type="text/javascript">
 
-        // evaluate random variable for determining whether player get firm A or B in choice mode 2
-        var rval = Math.floor(Math.random() * 26)
-
         window.onload = function () 
         {
-            document.getElementById("arrive_time").value = (new Date()).toISOString();
-            if ({{ choice | json }} == 2) {
-                update()
-            }
-
-        }
-
-        // when the slider is updated, the new value is compared to the random variable
-        // generated when the page loaded, and the value of the input firm is updated
-        update = function() {
-            disp = document.getElementById('value')
-            slider = document.getElementById('slider')
-            firm = document.getElementById('firm')
-            disp.innerHTML = '$0.' + slider.value + (slider.value < 10 ? '0' : '')
-
-            if(slider.value > rval) {
-                firm.value = 'A'
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+            if({{ choice}} == '1' || {{ choice }} == '2') {
+                document.getElementById('next').style.display = 'none'
             }
             else {
-                firm.value = 'B'
+                document.getElementById('fake').style.display = 'none'
+            }
+            document.getElementById('switch_form').value = 'N/A'
+        }
+
+        var firm
+        var ready = false
+
+        offer_switch = function() {
+            if(ready == false) {
+                if(document.getElementById('A').checked) {
+                    firm = 'A'
+                }
+                else {
+                    firm = 'B'
+                }
+                document.getElementById('A').disabled = true
+                document.getElementById('B').disabled = true
+                document.getElementById('switch').style.display = 'block'
+                ready = true
+            }
+            else {
+                //document.getElementById('choose').style.display = 'none'
+                document.getElementById('switch').style.display = 'none'
+
+                var s = 'The random value chosen was ' + {{ rval | json }} + '.'
+                var yes = s + ' You selected YES for that amount. As \
+                            a result, we switched you from firm ' + firm + ' to firm ' + 
+                            (firm == 'A' ? 'B' : 'A') + '.'
+                var no = s + ' You selected NO for that amount. As \
+                            a result, we did not switch your firm. You will continue with firm '
+                            + firm + '.'
+
+                msg = document.getElementById('message')
+                msg.style.display = 'block'
+                s_form = document.getElementById('switch_form')
+
+                switch( {{ rval | json}} ) {
+                    case 5:
+                        if(document.getElementById("c5y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 10:
+                        if(document.getElementById("c10y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 15:
+                        if(document.getElementById("c15y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 20:
+                        if(document.getElementById("c20y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 25:
+                        if(document.getElementById("c25y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 30:
+                        if(document.getElementById("c30y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 35:
+                        if(document.getElementById("c35y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 40:
+                        if(document.getElementById("c40y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 45:
+                        if(document.getElementById("c45y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                    case 50:
+                        if(document.getElementById("c50y").checked) {
+                            msg.innerHTML = yes
+                            s_form.value = 'Yes'
+                        }
+                        else {
+                            msg.innerHTML = no
+                            s_form.value = 'No'
+                        }
+                        break
+                }
+
+                document.getElementById('fake').style.display = 'none'
+                document.getElementById('next').style.display = 'block'
             }
         }
 
@@ -53,40 +177,104 @@
     <html>
         <body>
             <input type="hidden" name="time_ChooseFirm" id="arrive_time"/>
+            <input type="hidden" name="switch" id="switch_form">
             <p>
                 If you choose firm A, you and the other members of your group
                 (your opponents) will be able to see each other's baseline scores. If you choose
                 firm B, each of you will only be able to see your own baseline score.
             </p>
-            {% if choice == 1 %}
-                <p>
-                    Choose your firm.
-                </p>
 
-                <input type="radio" name="firm" value="A">
-                A <br>
-                <input type="radio" name=firm" vlaue="B">
-                B <br>
-            {% elif choice == 2 %}
+            <p id="choose">
+                Choose your firm. <br>
+                <input id="A" type="radio" name="firm" value="A"> A <br>
+                <input id="B" type="radio" name="firm" value="B" checked="checked"> B <br> 
+            </p>
+
+            <p id="message" style="display: none">
+            </p>
+
+            <div id="switch" style="display: none;">
                 <div>
-                    How much would you be willing to pay to for Firm A?
+                    Would you accept the following amounts of payment to switch
+                    from your chosen firm to the other firm?
                 </div>
                 <br>
-                <div id="value">
-                </div>
-                <br>
-                <input type="range" min="0" max="25" value="0"
-                    id="slider" oninput="update()">
-                <br>
-
-                <input type="hidden" name="firm" id="firm">
-                {{ form.firm.errors }}
-            
-            {% endif %}
+                <table>
+                    <tr>
+                        <th width="100px"> Amount </th>
+                        <th width="100px"> Yes </th>
+                        <th width="100px"> No </th>
+                    </tr>
+                    <tr>
+                        <td> $0.05 </td>
+                        <td> <input id="c5y" type="radio" name="c5" value="Yes" id="A"> <td>
+                        <td> <input id="c5n" type="radio" name="c5" value="No" checked="checked" id="B" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.10 </td>
+                        <td> <input id="c10y" type="radio" name="c10" value="Yes"> <td>
+                        <td> <input id="c10n" type="radio" name="c10" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.15 </td>
+                        <td> <input id="c15y" type="radio" name="c15" value="Yes"> <td>
+                        <td> <input id="c15n" type="radio" name="c15" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.20 </td>
+                        <td> <input id="c20y" type="radio" name="c20" value="Yes"> <td>
+                        <td> <input id="c20n" type="radio" name="c20" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.25 </td>
+                        <td> <input id="c25y" type="radio" name="c25" value="Yes"> <td>
+                        <td> <input id="c25n" type="radio" name="c25" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.30 </td>
+                        <td> <input id="c30y" type="radio" name="c30" value="Yes"> <td>
+                        <td> <input id="c30n" type="radio" name="c30" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.35 </td>
+                        <td> <input id="c35y" type="radio" name="c35" value="Yes"> <td>
+                        <td> <input id="c35n" type="radio" name="c35" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.40 </td>
+                        <td> <input id="c40y" type="radio" name="c40" value="Yes"> <td>
+                        <td> <input id="c40n" type="radio" name="c40" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.45 </td>
+                        <td> <input id="c45y" type="radio" name="c45" value="Yes"> <td>
+                        <td> <input id="c45n" type="radio" name="c45" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                    <tr>
+                        <td> $0.50 </td>
+                        <td> <input id="c50y" type="radio" name="c50" value="Yes"> <td>
+                        <td> <input id="c50n" type="radio" name="c50" value="No" checked="checked" style="margin-left: -100px"> <td>
+                    </tr>
+                </table>
+            </div>
+                    
             <br>
         </body>
     </html>
 
-    {% next_button %}
+    <div id="fake">
+        <button type="button" class="btn btn-primary btn-large next-button" onclick="offer_switch()"
+            style="float: right;">Next</button>
+    </div>
+
+    <div id="next">
+        <button class="btn btn-primary btn-large next-button" style="float: right;">Next</button>
+    </div>
+
+    </script>
 
 {% endblock %}
+
+{% comment %}
+ 
+{% endcomment %}

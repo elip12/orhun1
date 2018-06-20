@@ -28,7 +28,7 @@ SESSION_CONFIGS = [
     {
        'name': 'orhun1',
        'display_name': 'orhun1',
-       'num_demo_participants': 3,
+       'num_demo_participants': 6,
        'app_sequence': ['baseline', 'waitpage', 'game1', 'game2'],
        'lower_bound': 0,
        'upper_bound': 10,
@@ -44,14 +44,14 @@ SESSION_CONFIGS = [
     #    'lower_bound': 0,
     #    'upper_bound': 10
     # },
-    # {
-    #    'name': 'game1',
-    #    'display_name': 'game 1',
-    #    'num_demo_participants': 3,
-    #    'app_sequence': ['game1'],
-    #    'lower_bound': 0,
-    #    'upper_bound': 10
-    # },
+    {
+       'name': 'game1',
+       'display_name': 'game 1',
+       'num_demo_participants': 3,
+       'app_sequence': ['game1'],
+       'lower_bound': 0,
+       'upper_bound': 10
+    },
 ]
 
 # ISO-639 code
