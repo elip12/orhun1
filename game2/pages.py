@@ -136,6 +136,25 @@ class Results(Page):
             'total_bonus': g1_bonus + g2_bonus
         }
 
+class Survey7(Page):
+    form_model = 'player'
+    form_fields = ['time_Survey7', 'q7']
+
+    def is_displayed(self):
+        return self.player.participant.vars['choice'] == 1 and self.player.id_in_group == 1
+
+class Survey8(Page):
+    form_model = 'player'
+    form_fields = ['time_Survey8', 'q8', 'q9']
+
+class Survey10(Page):
+    form_model = 'player'
+    form_fields = ['time_Survey10', 'q10', 'q11']
+
+class Survey12(Page):
+    form_model = 'player'
+    form_fields = ['time_Survey12', 'q12']
+
 
 page_sequence = [
     Game2WaitPage,
@@ -143,5 +162,9 @@ page_sequence = [
     Game2,
     Results2WaitPage,
     Results2,
+    Survey7,
+    Survey8,
+    Survey10,
+    Survey12,
     Results
 ]

@@ -46,10 +46,15 @@ class ResultsBL(Page):
             'problems': inflect.engine().plural('problem', self.player.attempted)
         }
 
+class Survey1(Page):
+    form_model = 'player'
+    form_fields = ['time_Survey1', 'q1']
+
 
 # sequence in which pages are displayed
 page_sequence = [
     Instructions,
     Baseline,
-    ResultsBL
+    ResultsBL,
+    Survey1
 ]

@@ -60,7 +60,9 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     
     def creating_session(self):
-        self.session.vars['choice'] = (1 if random.random() >= 0.5 else 2)
+
+        for p in self.get_players():
+            p.participant.vars['choice'] = (1 if random.random() >= 0.5 else 2)
 
 
 class Group(BaseGroup):
@@ -108,6 +110,33 @@ class Player(BasePlayer):
     time_Instructions1 = models.StringField()
     time_Game1 = models.StringField()
     time_Results1 = models.StringField()
+    time_Survey1 = models.StringField()
+
+
+
+    q2 = models.StringField(
+        widget=widgets.RadioSelect,
+        choices=['2 others', '3 others', '4 others'],
+        label='How many other players will you be evaluated against?')
+
+    q3 = models.StringField(
+        widget=widgets.RadioSelect,
+        choices=['True', 'False'],
+        label='In Firm B, all players\' know each others\' scores before they compete.')
+    
+    q4 = models.StringField(
+        widget=widgets.RadioSelect,
+        choices=['Yes', 'No', 'I\'m not sure'],
+        label='How many other players will you be evaluated against?')
+
+    q5 = models.StringField(
+        widget=widgets.RadioSelect,
+        choices=['Firm A', 'Firm B'],
+        label='Please wait while we randomly assign you to two other participants in either \
+        Firm A or Firm B for the next round. If you could choose, which Firm would you prefer \
+        to compete in? Your answer will not affect the assignment in any way.')
+
+    q6 = models.StringField()
 
 
 

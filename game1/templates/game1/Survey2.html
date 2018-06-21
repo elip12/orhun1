@@ -1,0 +1,132 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        window.onload = function () 
+        {
+            document.getElementById("arrive_time").value = (new Date()).toISOString()
+        }
+
+        check_answers = function()
+        {
+
+            var a1 = document.getElementById('input1').value
+            var a2 = document.getElementById('input2').value
+            var a3 = document.getElementById('input3').value
+
+            toggle = true
+
+            if (a1 != '100')
+            {
+                var i1 = document.getElementById('incorrect1')
+                i1.innerHTML = "The correct answer is 100"
+                toggle = false
+            }
+            else
+                document.getElementById('incorrect1').innerHTML = ""
+
+            if (a2 != '30')
+            {
+                var i2 = document.getElementById('incorrect2')
+                i2.innerHTML = "The correct answer is 30"
+                toggle = false
+            }
+            else
+                document.getElementById('incorrect2').innerHTML = ""
+
+            if (a3 != '70')
+            {
+                var i3 = document.getElementById('incorrect3')
+                i3.innerHTML = "The correct answer is 70"
+                toggle = false
+            }
+            else
+                document.getElementById('incorrect3').innerHTML = ""
+            
+        }
+
+    </script>
+{% endblock %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+    
+    <input type="hidden" name="time_Survey2" id="arrive_time"/>
+
+    
+    {% next_button %}
+
+{% endblock %}
+
+
+{% comment %}
+
+
+
+{% block content %}
+    
+
+    <h4>
+        <font color=#4b82c1>The Concept of Rebate Revisited</font>
+    </h4>
+
+    <p>
+        If you are offered a rebate of 60% on your donations, it means when you donate $100 to a
+        charity, you will be refunded $60 to your personal account. The charity will still receive 
+        $100, but since you received a $60 rebate, your actual spending for donating $100 is $40.
+    </p>
+
+    <div>
+        <h4>
+            <font color=#4b82c1>You must answer correctly before proceeding to the paying task.</font>
+        </h4>
+    </div>
+    <hr>
+    <div>
+        <p>
+            Alex donated $100 with a rebate of 30% to the American Red Cross (ARC).
+        </p>
+        <br>
+        <p>
+            a). How much money will the ARC receive in donations?
+        </p>
+        
+        <p id="incorrect1" style="color: red;"></p>
+        <input id="input1" autocomplete="off">
+        <br>
+        <p>
+            b). How much money will Alex receive from the rebate?.
+        </p>
+        <p id="incorrect2" style="color: red;"></p>
+        <input id="input2" autocomplete="off">
+        <br>
+        <p>
+            c). Alex's actual spending for donating $100 is:
+        </p>
+        <p id="incorrect3" style="color: red;"></p>
+        <input id="input3" autocomplete="off">
+    </div>
+    <hr>
+
+    <div>
+        <button id="submit" class="btn btn-primary btn-large next-button"
+        style="float: left;">Submit</button>
+    </div>
+
+    <script type="text/javascript">
+    $(document).ready(function() 
+    {
+        $('.next-button').click(function()
+        {
+            check_answers()
+            return toggle
+        })
+    })
+    </script>
+{% endblock %}
+
+{% endcomment %}

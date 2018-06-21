@@ -11,7 +11,7 @@ class PlayerBot(Bot):
         score = r.randint(0,5)
         att = score + r.randint(0,5)
         if self.player.id_in_group == 1:
-            if self.session.vars['choice'] == 1:
+            if self.player.participant.vars['choice'] == 1:
                 yield (pages.ChooseFirm, {'firm': 'A', 'time_ChooseFirm': 'test', 'switch': 'No'})
             else:
                 yield (pages.ChooseFirm, {'firm': 'A', 'time_ChooseFirm': 'test', 'switch': 'No'})

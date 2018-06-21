@@ -107,3 +107,7 @@ Notes:
         - time limit (s) for arithmetic pages, default 120
         - option to use browser bots to test, default False
 
+    Right now, player 1 (the firm decider) is the first person in each group to complete the baselin
+    task, This should probably change to assure randomness. It needs to be done in the beginning of game
+    1.
+

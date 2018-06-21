@@ -33,22 +33,31 @@ SESSION_CONFIGS = [
        'lower_bound': 0,
        'upper_bound': 10,
        'min_players': 6,
-       'time_limit': 120,
+       'time_limit': 10,
        'use_browser_bots': True,
     },
-    # {
-    #    'name': 'baseline',
-    #    'display_name': 'baseline',
-    #    'num_demo_participants': 1,
-    #    'app_sequence': ['baseline'],
-    #    'lower_bound': 0,
-    #    'upper_bound': 10
-    # },
+    {
+       'name': 'baseline',
+       'display_name': 'baseline',
+       'num_demo_participants': 1,
+       'app_sequence': ['baseline'],
+       'lower_bound': 0,
+       'upper_bound': 10
+    },
     {
        'name': 'game1',
        'display_name': 'game 1',
        'num_demo_participants': 3,
        'app_sequence': ['game1'],
+       'lower_bound': 0,
+       'upper_bound': 10
+    },
+
+    {
+       'name': 'game2',
+       'display_name': 'game 2',
+       'num_demo_participants': 3,
+       'app_sequence': ['game2'],
        'lower_bound': 0,
        'upper_bound': 10
     },

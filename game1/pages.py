@@ -24,13 +24,13 @@ class ChooseFirm(Page):
 
     def vars_for_template(self):
         return {
-            'choice': self.session.vars['choice'],
+            'choice': self.player.participant.vars['choice'],
             'rval': random.randrange(5, 55, 5),
         }
 
     def get_form_fields(self):
-        if self.player.id_in_group == 1 and self.session.vars['choice'] == 2:
-            return ['firm', 'time_ChooseFirm', 'c5', 'c10', 'c15', 'c20', 'c25', 'c30', 'c35', 'c40', 'c45', 'c50', 'switch']
+        if self.player.id_in_group == 1 and self.player.participant.vars['choice'] == 2:
+            return ['q6', 'firm', 'time_ChooseFirm', 'c5', 'c10', 'c15', 'c20', 'c25', 'c30', 'c35', 'c40', 'c45', 'c50', 'switch']
         else:
             return ['firm', 'time_ChooseFirm']
 
@@ -122,12 +122,33 @@ class Results1(Page):
             'problems': inflect.engine().plural('problem', self.player.attempted)
         }
 
+class Survey2(Page):
+    form_model = 'player'
+    form_fields = ['time_Survey2', 'q2', 'q3']
+
+class Survey4(Page):
+    form_model = 'player'
+
+    def vars_for_template(self):
+        if self.player.id_in_group == 1:
+            return {'firm': self.player.participant.vars['firm']}
+        else:
+            return {}
+
+    def get_form_fields(self):
+        if self.player.id_in_group == 1:
+            return ['time_Survey4', 'q4']
+        else:
+            return ['time_Survey5', 'q5']
+
 
 page_sequence = [
     Game1WaitPage,
     ChooseFirm,
+    Survey4,
     Instructions1WaitPage,
     Instructions1,
+    Survey2,
     Game1,
     Results1WaitPage,
     Results1

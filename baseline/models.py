@@ -77,6 +77,9 @@ class Player(BasePlayer):
     time_Instructions = models.StringField()
     time_Baseline = models.StringField()
     time_ResultsBL = models.StringField()
+    time_Survey1 = models.StringField()
+
+    q1 = models.IntegerField()
 
 
 

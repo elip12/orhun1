@@ -63,7 +63,6 @@ class Subsession(BaseSubsession):
 
         self.group_randomly(fixed_id_in_group=True)
 
-
 class Group(BaseGroup):
     pass
 
@@ -90,70 +89,35 @@ class Player(BasePlayer):
     time_Game2 = models.StringField()
     time_Results2 = models.StringField()
     time_Results = models.StringField()
+    time_Survey7 = models.StringField()
+    time_Survey8 = models.StringField()
+    time_Survey10 = models.StringField()
+    time_Survey12 = models.StringField()
+
+    
+    q7 = models.LongStringField(label='You chose Firm A/B in the first contest. \
+        If given the choice again would you still choose Firm A/B or would you change your choice? Why?')
+    q8 = models.StringField(
+        widget=widgets.RadioSelect,
+        choices=['Won', 'Came Second', 'Lost'],
+        label='Do you think you won, came second, or lost the first contest?')
+    q9 = models.StringField(
+        widget=widgets.RadioSelect,
+        choices=['Won', 'Came Second', 'Lost'],
+        label='Do you think you won, came second, or lost the second contest?')
+    q10 = models.PositiveIntegerField(label='Age')
+    q11 = models.StringField(
+        widget=widgets.RadioSelect,
+        choices=['Man', 'Woman', 'Non-binary', 'Other'],
+        label='Gender')
+    q12 = models.LongStringField(label='Was there any part of the study that was confusing? Please help us improve our study by providing feedback.')
 
 
 
-"""
-Baseline Score Task
-Single player baseline performance collection
-Arithmetic Task: Three word-number addition
-e.g., twenty-five plus five plus thirteen
-Everyone gets same sequence of questions
-Complete as many of these arithmetic problems as possible within 2 minutes
-Each page has one question, they submit each page and then get another page until timeout
-Answer input box integer, forced response
-Score is the number of correct answers within 2 minutes
-Save “BaselineScore” as participant variable (fixed variable)
-No payment for baseline task
-See own score after finishing Baseline Task 
-you attempted 18 questions and 12 were right, so your score is 12
 
-Game 1 
-Once 12 MTurkers have finished the baseline task, start Game 1
-4 groups of 3 people
-Player 1 in each group will see the following:
-Would you like to choose Firm A (see opponent scores) or would you like to choose Firm B (do not see opponent scores)?
-If Firm A, Player 1’s group type is A, and Player 2 and 3 are also of group type A
-If Firm B, Player 1’s group type is B, and Player 2 and 3 are also of group type B
-Players 2 and 3 will wait until Player 1 makes the choice then see: 
-You have been assigned to Firm A/B
 
-Each player sees or does not see baseline performance scores of others in group based on Person 1’s choice
-Your score in the baseline task was: 
-Opponent 1’s score was:
-Opponent 2’s score was:
 
-All players then play same task as in baseline
-Work in task alone single player
-Calculate the relative rank of each player but don’t display to the participants yet
-Relative performance scale for each 3 person group - most correct gets $2 bonus, 2nd gets $1, last gets nothing in contest round
 
-Game 2
-Groups are re-formed. 
-Player 1 is always assigned to the other group type in Game 2 (if they chose FirmA in Game 1, they will now play FirmB, and vice versa),
-Players 2 and 3 are randomly mixed to be the players 2 and 3 of any of the 4 groups
-Player 1 determines group type, player 2 and 3 always get whatever player 1 determined. 
 
-Each player sees or does not see baseline performance scores of others in group based on group type
-Your score in the baseline task was: 
-Opponent 1’s score was:
-Opponent 2’s score was:
 
-All players then play same task as in baseline
-Work in task alone single player
-Calculate the relative rank of each player but don’t display to the participants yet
-Relative performance scale for each 3 person group - most correct gets $2 bonus, 2nd gets $1, last gets nothing in contest round
 
-END
-In the baseline task, you attempted X out of X questions. Your baseline score was X. 
-In Game 1, you attempted X out of X questions. Your score for Game 1 was X. 
-In Game 2, you attempted X out of X questions. Your score for Game 2was X. 
-
-In Game 1, you ranked X out of 3 players. Your bonus for Game 1 is $$
-In Game 2, you ranked X out of 3 players. Your bonus for Game 2 is $$
-
-Your total payment is $$
-
-The top scoring player of each game will get a $2 bonus. The second highest score in each game will receive a $1 bonus. The third score (lowest) in each game will not receive a bonus.
-
-"""
