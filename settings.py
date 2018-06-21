@@ -34,7 +34,7 @@ SESSION_CONFIGS = [
        'upper_bound': 10,
        'min_players': 6,
        'time_limit': 120,
-       #'use_browser_bots': True,
+       'use_browser_bots': True,
     },
     # {
     #    'name': 'baseline',

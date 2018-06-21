@@ -15,7 +15,6 @@ class Game1WaitPage(WaitPage):
 # one player in each group chooses firm A or firm B
 class ChooseFirm(Page):
     form_model = 'player'
-    form_fields = ['firm', 'time_ChooseFirm', 'c5', 'c10', 'c15', 'c20', 'c25', 'c30', 'c35', 'c40', 'c45', 'c50', 'switch']
 
     timeout_seconds = 60
     timeout_submission = {'firm': 'B'}
@@ -25,9 +24,15 @@ class ChooseFirm(Page):
 
     def vars_for_template(self):
         return {
-            'choice': 1 if random.random() >= .5 else 2,
+            'choice': self.session.vars['choice'],
             'rval': random.randrange(5, 55, 5),
         }
+
+    def get_form_fields(self):
+        if self.player.id_in_group == 1 and self.session.vars['choice'] == 2:
+            return ['firm', 'time_ChooseFirm', 'c5', 'c10', 'c15', 'c20', 'c25', 'c30', 'c35', 'c40', 'c45', 'c50', 'switch']
+        else:
+            return ['firm', 'time_ChooseFirm']
 
     def before_next_page(self):
         for p in self.group.get_players():
@@ -59,7 +64,7 @@ class Instructions1(Page):
 # game 1 task
 class Game1(Page):
     form_model = 'player'
-    form_fields = ['game1_score', 'attempted', 'time_Game1', 'switch']
+    form_fields = ['game1_score', 'attempted', 'time_Game1']
 
     # timer until page automatically submits itself
     timeout_seconds = settings.SESSION_CONFIGS[0]['time_limit']

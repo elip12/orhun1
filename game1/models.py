@@ -58,7 +58,9 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    
+    def creating_session(self):
+        self.session.vars['choice'] = (1 if random.random() >= 0.5 else 2)
 
 
 class Group(BaseGroup):

@@ -11,7 +11,7 @@
         window.onload = function () 
         {
             document.getElementById("arrive_time").value = (new Date()).toISOString()
-            if({{ choice}} == '1' || {{ choice }} == '2') {
+            if({{ choice }} == '2') {
                 document.getElementById('next').style.display = 'none'
             }
             else {
@@ -19,20 +19,17 @@
             }
             document.getElementById('switch_form').value = 'N/A'
         }
-
-        var firm
         var ready = false
 
         offer_switch = function() {
             if(ready == false) {
                 if(document.getElementById('A').checked) {
-                    firm = 'A'
+                    var firm = 'A'
                 }
                 else {
-                    firm = 'B'
+                    var firm = 'B'
                 }
-                document.getElementById('A').disabled = true
-                document.getElementById('B').disabled = true
+                document.getElementById('choose').style.display = 'none'
                 document.getElementById('switch').style.display = 'block'
                 ready = true
             }
@@ -177,7 +174,7 @@
     <html>
         <body>
             <input type="hidden" name="time_ChooseFirm" id="arrive_time"/>
-            <input type="hidden" name="switch" id="switch_form">
+            <input type="hidden" name="switch" id="switch_form"/>
             <p>
                 If you choose firm A, you and the other members of your group
                 (your opponents) will be able to see each other's baseline scores. If you choose
@@ -186,8 +183,8 @@
 
             <p id="choose">
                 Choose your firm. <br>
-                <input id="A" type="radio" name="firm" value="A"> A <br>
-                <input id="B" type="radio" name="firm" value="B" checked="checked"> B <br> 
+                <input id="A" type="radio" name="firm" value="A"/> A <br>
+                <input id="B" type="radio" name="firm" value="B" checked="checked"/> B <br> 
             </p>
 
             <p id="message" style="display: none">
@@ -207,53 +204,53 @@
                     </tr>
                     <tr>
                         <td> $0.05 </td>
-                        <td> <input id="c5y" type="radio" name="c5" value="Yes" id="A"> <td>
-                        <td> <input id="c5n" type="radio" name="c5" value="No" checked="checked" id="B" style="margin-left: -100px"> <td>
+                        <td> <input id="c5y" type="radio" name="c5" value="Yes" id="A"/> </td>
+                        <td> <input id="c5n" type="radio" name="c5" value="No" checked="checked" id="B"/> </td>
                     </tr>
                     <tr>
                         <td> $0.10 </td>
-                        <td> <input id="c10y" type="radio" name="c10" value="Yes"> <td>
-                        <td> <input id="c10n" type="radio" name="c10" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c10y" type="radio" name="c10" value="Yes"/> </td>
+                        <td> <input id="c10n" type="radio" name="c10" value="No" checked="checked"/> </td>
                     </tr>
                     <tr>
                         <td> $0.15 </td>
-                        <td> <input id="c15y" type="radio" name="c15" value="Yes"> <td>
-                        <td> <input id="c15n" type="radio" name="c15" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c15y" type="radio" name="c15" value="Yes"/> </td>
+                        <td> <input id="c15n" type="radio" name="c15" value="No" checked="checked"/> </td>
                     </tr>
                     <tr>
                         <td> $0.20 </td>
-                        <td> <input id="c20y" type="radio" name="c20" value="Yes"> <td>
-                        <td> <input id="c20n" type="radio" name="c20" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c20y" type="radio" name="c20" value="Yes"/> </td>
+                        <td> <input id="c20n" type="radio" name="c20" value="No" checked="checked"/> </td>
                     </tr>
                     <tr>
                         <td> $0.25 </td>
-                        <td> <input id="c25y" type="radio" name="c25" value="Yes"> <td>
-                        <td> <input id="c25n" type="radio" name="c25" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c25y" type="radio" name="c25" value="Yes"/> </td>
+                        <td> <input id="c25n" type="radio" name="c25" value="No" checked="checked"/> </td>
                     </tr>
                     <tr>
                         <td> $0.30 </td>
-                        <td> <input id="c30y" type="radio" name="c30" value="Yes"> <td>
-                        <td> <input id="c30n" type="radio" name="c30" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c30y" type="radio" name="c30" value="Yes"/> </td>
+                        <td> <input id="c30n" type="radio" name="c30" value="No" checked="checked"/> </td>
                     </tr>
                     <tr>
                         <td> $0.35 </td>
-                        <td> <input id="c35y" type="radio" name="c35" value="Yes"> <td>
-                        <td> <input id="c35n" type="radio" name="c35" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c35y" type="radio" name="c35" value="Yes"/> </td>
+                        <td> <input id="c35n" type="radio" name="c35" value="No" checked="checked"/> <td>
                     </tr>
                     <tr>
                         <td> $0.40 </td>
-                        <td> <input id="c40y" type="radio" name="c40" value="Yes"> <td>
-                        <td> <input id="c40n" type="radio" name="c40" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c40y" type="radio" name="c40" value="Yes"/> </td>
+                        <td> <input id="c40n" type="radio" name="c40" value="No" checked="checked"/> </td>
                     </tr>
                     <tr>
                         <td> $0.45 </td>
-                        <td> <input id="c45y" type="radio" name="c45" value="Yes"> <td>
-                        <td> <input id="c45n" type="radio" name="c45" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c45y" type="radio" name="c45" value="Yes"/> </td>
+                        <td> <input id="c45n" type="radio" name="c45" value="No" checked="checked"/> </td>
                     </tr>
                     <tr>
                         <td> $0.50 </td>
-                        <td> <input id="c50y" type="radio" name="c50" value="Yes"> <td>
-                        <td> <input id="c50n" type="radio" name="c50" value="No" checked="checked" style="margin-left: -100px"> <td>
+                        <td> <input id="c50y" type="radio" name="c50" value="Yes"/> </td>
+                        <td> <input id="c50n" type="radio" name="c50" value="No" checked="checked"/> </td>
                     </tr>
                 </table>
             </div>
