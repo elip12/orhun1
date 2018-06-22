@@ -11,10 +11,7 @@ class PlayerBot(Bot):
         score = r.randint(0,5)
         att = score + r.randint(0,5)
         if self.player.id_in_group == 1:
-            if self.player.participant.vars['choice'] == 1:
-                yield (pages.ChooseFirm, {'firm': 'A', 'time_ChooseFirm': 'test', 'switch': 'No'})
-            else:
-                yield (pages.ChooseFirm, {'firm': 'A', 'time_ChooseFirm': 'test', 'switch': 'No'})
+            yield (pages.ChooseFirm, {'firm': 'A', 'time_ChooseFirm': 'test', 'switch': 'No', 'q6': 'test'})
         yield (pages.Instructions1, {'time_Instructions1': 'test'})
         yield Submission(pages.Game1, 
             {'time_Game1': 'test', 'game1_score': score, 'attempted': att},

@@ -7,7 +7,7 @@ from django.conf import settings
 
 # wait page before game 1
 class Game1WaitPage(WaitPage):
-    group_by_arrival_time = True
+    #group_by_arrival_time = True
     
     def after_all_players_arrive(self):
         pass
@@ -29,10 +29,10 @@ class ChooseFirm(Page):
         }
 
     def get_form_fields(self):
-        if self.player.id_in_group == 1 and self.player.participant.vars['choice'] == 2:
+        if self.player.participant.vars['choice'] == 2:
             return ['q6', 'firm', 'time_ChooseFirm', 'c5', 'c10', 'c15', 'c20', 'c25', 'c30', 'c35', 'c40', 'c45', 'c50', 'switch']
         else:
-            return ['firm', 'time_ChooseFirm']
+            return ['q6', 'firm', 'time_ChooseFirm']
 
     def before_next_page(self):
         for p in self.group.get_players():
@@ -122,33 +122,38 @@ class Results1(Page):
             'problems': inflect.engine().plural('problem', self.player.attempted)
         }
 
-class Survey2(Page):
-    form_model = 'player'
-    form_fields = ['time_Survey2', 'q2', 'q3']
+# class Survey2(Page):
+#     form_model = 'player'
+#     form_fields = ['time_Survey2', 'q2', 'q3']
 
-class Survey4(Page):
-    form_model = 'player'
+# class Survey4(Page):
+#     form_model = 'player'
 
-    def vars_for_template(self):
-        if self.player.id_in_group == 1:
-            return {'firm': self.player.participant.vars['firm']}
-        else:
-            return {}
+#     def vars_for_template(self):
+#         if self.player.id_in_group == 1:
+#             return {
+#                 'id': 1,
+#                 'firm': self.player.participant.vars['firm']
+#             }
+#         else:
+#             return {
+#                 'id': 2
+#             }
 
-    def get_form_fields(self):
-        if self.player.id_in_group == 1:
-            return ['time_Survey4', 'q4']
-        else:
-            return ['time_Survey5', 'q5']
+#     def get_form_fields(self):
+#         if self.player.id_in_group == 1:
+#             return ['time_Survey4', 'q4']
+#         else:
+#             return ['time_Survey5', 'q5']
 
 
 page_sequence = [
     Game1WaitPage,
     ChooseFirm,
-    Survey4,
+    #Survey4,
     Instructions1WaitPage,
     Instructions1,
-    Survey2,
+    #Survey2,
     Game1,
     Results1WaitPage,
     Results1

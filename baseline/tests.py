@@ -16,3 +16,4 @@ class PlayerBot(Bot):
             {'time_Baseline': 'test', 'baseline_score': score, 'attempted': att}, 
             check_html=False)
         yield (pages.ResultsBL, {'time_ResultsBL': 'test'})
+        yield (pages.Survey1, {'time_Survey1': 'test', 'q1': 5})
