@@ -31,9 +31,9 @@ SESSION_CONFIGS = [
        'num_demo_participants': 6,
        'app_sequence': ['baseline', 'waitpage', 'game1', 'game2'],
        'lower_bound': 0,
-       'upper_bound': 10,
+       'upper_bound': 25,
        'min_players': 6,
-       'time_limit': 10,
+       'time_limit': 120,
        #'use_browser_bots': True,
     },
     {
