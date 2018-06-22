@@ -7,7 +7,7 @@ To begin:
 Notes:
 =============
 
-    I do not have time to finish the survey. 
+    - I do not have time to finish the survey. 
     Question 1 is implemented, along with questions 6-12 (5-11 in
     the email, I understand why you duplicated #4 but for the purpose of returning form fields they
     need different names).
@@ -26,15 +26,17 @@ Notes:
     The bots do not work in game 2 because I did not have them yield the survey pages. If you want
     to do that it won't be much work, see the otree docs and the existing code.
 
-    IDK if it is possible to do MTurk in kiosk mode, but players refreshing their webpages can
+
+
+    - IDK if it is possible to do MTurk in kiosk mode, but players refreshing their webpages can
     have unpredictable results and at the very least I recommend telling them not to in the
     initial instructions.
 
-    I am leaving the instructions for you to edit as you see fit. Right now, they are empty. There
+    - I am leaving the instructions for you to edit as you see fit. Right now, they are empty. There
     are 3 instruction pages that must be edited: Instructions.html, Instructions1.html, and
     Instructions2.html.  
 
-    All configurable settings are in SESSION_CONFIGS in settings.py
+    - All configurable settings are in SESSION_CONFIGS in settings.py
     Configurable settings:
         - upper and lower bounds for the numbers in the arithmetic tasks, default [0, 25]
         - minimum number of players needed to advance to game 1, default 6
